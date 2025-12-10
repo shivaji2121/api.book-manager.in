@@ -12,7 +12,7 @@ const registerUser = async (req, res) => {
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
-        const { name, email, password, gender } = req.body;
+        const { name, email, password, gender, role } = req.body;
 
         const existingUser = await User.findOne({ email });
 
@@ -22,7 +22,7 @@ const registerUser = async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const result = await User.create({ name, email, gender, password: hashedPassword, });
+        const result = await User.create({ name, email, gender, password: hashedPassword, role: role || 'user' });
 
         res.status(201).json({ message: 'User registered successfully', user: result });
 
@@ -33,6 +33,33 @@ const registerUser = async (req, res) => {
     }
 }
 
+const registerAdmin = async (req, res) => {
+    try {
+
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+        const { name, email, password, gender } = req.body;
+
+        const existingUser = await User.findOne({ email });
+
+        if (existingUser) {
+            return res.status(400).json({ message: 'User already exists' });
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        const result = await User.create({ name, email, gender, role: "admin", password: hashedPassword, });
+
+        res.status(201).json({ message: 'admin registered successfully', result });
+
+    } catch (error) {
+        console.error('error in register controller:', error);
+        res.status(500).json({ message: 'Internal server error', error: error.message });
+
+    }
+}
 
 const login = async (req, res) => {
     try {
@@ -67,5 +94,6 @@ const login = async (req, res) => {
 }
 module.exports = {
     registerUser,
-    login
+    login,
+    registerAdmin
 };

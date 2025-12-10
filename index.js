@@ -3,6 +3,7 @@ const connectDB = require('./src/config/dataBase');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const userRoutes = require('./src/routes/user.routes');
+const bookRouter = require('./src/routes/book.routes');
 
 const app = express();
 app.use(express.json());
@@ -14,6 +15,7 @@ app.use(cookieParser());
 const PORT = process.env.PORT || 3000;
 
 app.use('/auth', userRoutes);
+app.use('/books', bookRouter);
 
 app.get('/', (req, res) => {
     res.send("Welcome to Book Manager API");
