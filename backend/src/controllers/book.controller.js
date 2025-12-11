@@ -7,7 +7,21 @@ const createBook = async (req, res) => {
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
-        const { title, author, category, description } = req.body;
+        const {
+            title,
+            author,
+            category,
+            description,
+            isbn,
+            publisher,
+            publicationYear,
+            pages,
+            language,
+            coverImage,
+            rating,
+            readingStatus,
+            notes
+        } = req.body;
         const userId = req.user._id;
 
         const titleExists = await Book.findOne({ title, userId, deletedAt: null });
@@ -20,6 +34,15 @@ const createBook = async (req, res) => {
             author,
             category,
             description,
+            isbn,
+            publisher,
+            publicationYear,
+            pages,
+            language,
+            coverImage,
+            rating,
+            readingStatus,
+            notes,
             userId
         });
 
@@ -39,7 +62,21 @@ const updateBook = async (req, res) => {
         }
 
         const { id } = req.params;
-        const { title, author, category, description } = req.body;
+        const {
+            title,
+            author,
+            category,
+            description,
+            isbn,
+            publisher,
+            publicationYear,
+            pages,
+            language,
+            coverImage,
+            rating,
+            readingStatus,
+            notes
+        } = req.body;
         const userId = req.user._id;
 
         const book = await Book.findOne({ _id: id, userId, deletedAt: null });
@@ -47,7 +84,23 @@ const updateBook = async (req, res) => {
             return res.status(404).json({ message: 'Book not found or not authorized' });
         }
 
-        const result = await Book.findByIdAndUpdate(id, { title, author, category, description }, { new: true });
+        const updateData = {
+            title,
+            author,
+            category,
+            description,
+            isbn,
+            publisher,
+            publicationYear,
+            pages,
+            language,
+            coverImage,
+            rating,
+            readingStatus,
+            notes
+        };
+
+        const result = await Book.findByIdAndUpdate(id, updateData, { new: true });
         res.status(200).json({ message: 'Book updated successfully', result });
     } catch (error) {
         console.error('Error updating book:', error);

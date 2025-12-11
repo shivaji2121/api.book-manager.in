@@ -1,24 +1,33 @@
 {
-  "name": "api.bookmanger.in",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "bcrypt": "^6.0.0",
-    "cookie-parser": "^1.4.7",
-    "cors": "^2.8.5",
-    "dotenv": "^17.2.3",
-    "express": "^5.2.1",
-    "express-validator": "^7.3.1",
-    "jsonwebtoken": "^9.0.3",
-    "mongoose": "^9.0.1",
-    "nodemon": "^3.1.11"
-  }
+    "name": "book-manager",
+    "version": "1.0.0",
+    "description": "A full-stack book management application with enhanced UI featuring colorful cards and gradient accents",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
+        "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+        "start:backend": "node backend/index.js",
+        "dev:backend": "nodemon backend/index.js",
+        "dev:frontend": "cd frontend && npm run dev",
+        "build:frontend": "cd frontend && npm run build",
+        "preview:frontend": "cd frontend && npm run preview",
+        "lint:frontend": "cd frontend && npm run lint"
+    },
+    "devDependencies": {
+        "concurrently": "^9.1.0",
+        "nodemon": "^3.1.11"
+    },
+    "keywords": [
+        "book-manager",
+        "fullstack",
+        "react",
+        "nodejs",
+        "express",
+        "mongodb",
+        "gradient-ui",
+        "card-layout"
+    ],
+    "author": "BookManager Team",
+    "license": "MIT"
 }

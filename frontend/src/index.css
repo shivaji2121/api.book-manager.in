@@ -1,0 +1,120 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 250 100% 98%;
+    --foreground: 270 15% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 270 15% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 270 15% 15%;
+
+    --primary: 270 80% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 280 60% 90%;
+    --secondary-foreground: 270 15% 15%;
+
+    --muted: 280 40% 95%;
+    --muted-foreground: 270 10% 45%;
+
+    --accent: 280 70% 85%;
+    --accent-foreground: 270 15% 15%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 280 30% 88%;
+    --input: 280 30% 88%;
+    --ring: 270 80% 60%;
+
+    --radius: 0.5rem;
+
+    /* Purple gradient colors */
+    --gradient-start: 270 80% 60%;
+    --gradient-mid: 280 70% 65%;
+    --gradient-end: 290 75% 70%;
+  }
+
+  .dark {
+    --background: 270 30% 8%;
+    --foreground: 280 20% 95%;
+
+    --card: 270 25% 12%;
+    --card-foreground: 280 20% 95%;
+
+    --popover: 270 25% 12%;
+    --popover-foreground: 280 20% 95%;
+
+    --primary: 270 80% 65%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 270 20% 18%;
+    --secondary-foreground: 280 20% 95%;
+
+    --muted: 270 20% 18%;
+    --muted-foreground: 280 15% 65%;
+
+    --accent: 270 25% 22%;
+    --accent-foreground: 280 20% 95%;
+
+    --destructive: 0 62.8% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 270 20% 22%;
+    --input: 270 20% 22%;
+    --ring: 270 80% 65%;
+
+    /* Purple gradient colors for dark mode */
+    --gradient-start: 270 80% 55%;
+    --gradient-mid: 280 70% 60%;
+    --gradient-end: 290 75% 65%;
+  }
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    background-image: radial-gradient(hsl(var(--primary)/0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  /* Gradient utilities */
+  .bg-gradient-linear {
+    background: linear-gradient(135deg, hsl(var(--gradient-start)), hsl(var(--gradient-end)));
+  }
+
+  .bg-gradient-linear-hover {
+    background: linear-gradient(135deg, hsl(var(--gradient-start)), hsl(var(--gradient-end)));
+    transition: all 0.3s ease;
+  }
+
+  .bg-gradient-linear-hover:hover {
+    background: linear-gradient(135deg, hsl(var(--gradient-end)), hsl(var(--gradient-start)));
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px hsl(var(--primary)/0.3);
+  }
+}
+
+/* Custom card enhancements */
+.card-enhanced {
+  @apply rounded-xl border bg-card text-card-foreground shadow-lg transition-all duration-300 hover:shadow-xl;
+}
+
+.card-gradient-border {
+  position: relative;
+  border: none;
+  background: linear-gradient(135deg, hsl(var(--gradient-start)), hsl(var(--gradient-end))) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+}
