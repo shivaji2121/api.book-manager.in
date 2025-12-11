@@ -13,6 +13,7 @@ const apiRequest = async (endpoint, options = {}) => {
     }
 
     try {
+        console.log(`Making API request to: ${API_BASE_URL}${endpoint}`, options); // Debug log
         const response = await fetch(`${API_BASE_URL}${endpoint}`, {
             ...options,
             headers,
@@ -29,6 +30,10 @@ const apiRequest = async (endpoint, options = {}) => {
         return data;
     } catch (error) {
         console.error('API Request Error:', error);
+        // Add more detailed error information
+        if (error instanceof TypeError && error.message === 'Failed to fetch') {
+            throw new Error('Network error: Unable to connect to the server');
+        }
         throw error;
     }
 };

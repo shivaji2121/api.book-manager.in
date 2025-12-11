@@ -12,11 +12,16 @@ const bookService = {
     },
 
     createBook: async (bookData) => {
-        const data = await apiRequest('/books/create', {
-            method: 'POST',
-            body: JSON.stringify(bookData),
-        });
-        return data.result;
+        try {
+            const data = await apiRequest('/books/create', {
+                method: 'POST',
+                body: JSON.stringify(bookData),
+            });
+            return data.result;
+        } catch (error) {
+            console.error('BookService createBook error:', error);
+            throw error;
+        }
     },
 
     updateBook: async (bookId, bookData) => {
@@ -70,9 +75,7 @@ const bookService = {
             reading: books.filter(b => b.readingStatus === 'Reading').length,
             completed: books.filter(b => b.readingStatus === 'Completed').length,
             onHold: books.filter(b => b.readingStatus === 'On Hold').length,
-            averageRating: books.length > 0
-                ? (books.reduce((sum, b) => sum + (b.rating || 0), 0) / books.length).toFixed(1)
-                : 0
+            averageRating: 0 
         };
     }
 };

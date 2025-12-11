@@ -55,13 +55,14 @@ const Dashboard = () => {
     const handleCreate = async (formData) => {
         setIsSubmitting(true);
         try {
+            console.log('Creating book with data:', formData); // Debug log
             await bookService.createBook(formData);
             toast.success('Book added successfully');
             setIsFormOpen(false);
             fetchBooks();
         } catch (error) {
-            console.error(error);
-            toast.error(error.response?.data?.message || 'Failed to add book');
+            console.error('Error creating book:', error);
+            toast.error(error.response?.data?.message || error.message || 'Failed to add book');
         } finally {
             setIsSubmitting(false);
         }
@@ -200,6 +201,7 @@ const Dashboard = () => {
                             <BookForm
                                 onSubmit={handleCreate}
                                 isSubmitting={isSubmitting}
+                                initialData={{}} // Ensure we pass an empty initialData object
                             />
                             <Button
                                 variant="ghost"

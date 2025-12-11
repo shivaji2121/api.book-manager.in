@@ -33,7 +33,6 @@ const BookCard = ({ book, onEdit, onDelete }) => {
 
     return (
         <Card className="flex flex-col h-full hover:shadow-xl transition-all duration-300 overflow-hidden border-2 border-primary/10 hover:border-primary/30 cursor-pointer group">
-            {/* Cover Image or Placeholder */}
             <div
                 onClick={handleCardClick}
                 className="relative h-48 bg-gradient-to-br from-primary/20 to-purple-600/20 overflow-hidden"
@@ -50,7 +49,6 @@ const BookCard = ({ book, onEdit, onDelete }) => {
                     </div>
                 )}
 
-                {/* Status Badge */}
                 <div className="absolute top-2 right-2">
                     <span className={`inline-block px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(book.readingStatus)}`}>
                         {book.readingStatus}
@@ -71,7 +69,6 @@ const BookCard = ({ book, onEdit, onDelete }) => {
             </CardHeader>
 
             <CardContent className="flex-grow" onClick={handleCardClick}>
-                {/* Rating */}
                 <div className="flex gap-1 mb-3">
                     {renderStars(book.rating || 0)}
                     {book.rating > 0 && (
@@ -81,12 +78,10 @@ const BookCard = ({ book, onEdit, onDelete }) => {
                     )}
                 </div>
 
-                {/* Description */}
                 <p className="text-muted-foreground text-sm line-clamp-3">
                     {book.description || 'No description available for this book.'}
                 </p>
 
-                {/* Additional Info */}
                 <div className="mt-3 space-y-1 text-xs text-muted-foreground">
                     {book.publicationYear && (
                         <p>Published: {book.publicationYear}</p>

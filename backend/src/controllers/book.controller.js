@@ -12,15 +12,7 @@ const createBook = async (req, res) => {
             author,
             category,
             description,
-            isbn,
-            publisher,
-            publicationYear,
-            pages,
-            language,
-            coverImage,
-            rating,
-            readingStatus,
-            notes
+            readingStatus
         } = req.body;
         const userId = req.user._id;
 
@@ -34,15 +26,7 @@ const createBook = async (req, res) => {
             author,
             category,
             description,
-            isbn,
-            publisher,
-            publicationYear,
-            pages,
-            language,
-            coverImage,
-            rating,
             readingStatus,
-            notes,
             userId
         });
 
@@ -67,15 +51,7 @@ const updateBook = async (req, res) => {
             author,
             category,
             description,
-            isbn,
-            publisher,
-            publicationYear,
-            pages,
-            language,
-            coverImage,
-            rating,
-            readingStatus,
-            notes
+            readingStatus
         } = req.body;
         const userId = req.user._id;
 
@@ -89,15 +65,7 @@ const updateBook = async (req, res) => {
             author,
             category,
             description,
-            isbn,
-            publisher,
-            publicationYear,
-            pages,
-            language,
-            coverImage,
-            rating,
-            readingStatus,
-            notes
+            readingStatus
         };
 
         const result = await Book.findByIdAndUpdate(id, updateData, { new: true });
